@@ -1,0 +1,11 @@
+# Linters
+ruff
+black
+
+# Testing
+pytest
+pytest-cov
+
+# Core
+fastapi[all]
+sqlalchemy
