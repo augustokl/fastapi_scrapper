@@ -6,6 +6,11 @@ black
 pytest
 pytest-cov
 
+# Deps
+pip-tools
+
 # Core
 fastapi[all]
 sqlalchemy
+psycopg2-binary
+alembic
