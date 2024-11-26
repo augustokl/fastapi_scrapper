@@ -1,0 +1,101 @@
+[project]
+requires-python = ">=3.12"
+name = "github_scrape"
+
+
+[tool.ruff.format]
+exclude = [".git", ".venv", ".jupyter"]
+
+[tool.ruff.lint]
+select = [
+    "E", # pycodestyle: errors
+    "F", # pyflakes
+    "S", # bandit
+    "I", # isort
+]
+
+ignore = [
+    "E501",
+    "E402",
+    "E203",
+    # Ignore these for now until we can fix these new lint suggestions
+    "F522",
+    "F523",
+    "F541",
+    "F811",
+    "E74",
+    "E721", # Do not compare types, use `isinstance()`
+    # Bandit ignores
+    "S101", # assert
+    "S113", # request-without-timeout
+    "S311", # suspicious-non-cryptographic-random-usage
+    "S308", # mark_safe
+    "S507", # paramiko
+]
+
+exclude = [
+    ".venv*",
+    "*/etc/*",
+    "docs/*",
+    "*/migrations/*",
+    "*/django111_postgres/*",
+    "*/node_modules/*",
+    "scf/custom_fields_serializers.py",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"*/factories.py" = [
+    # Bandit ignores
+    "S101", # assert
+    "S105", # hardcoded-password-string
+    "S106", # hardcoded-password-func-arg
+    "S608", # hardcoded-sql-expression
+]
+"scripts/*" = [
+    # Bandit ignores
+    "S101", # assert
+    "S106", # hardcoded-password-func-arg
+    "S608", # hardcoded-sql-expression
+]
+"scripts/anonymize.py" = [
+    # Bandit ignores
+    "S105", # hardcoded-password-string
+]
+"*/tests/*" = [
+    # Bandit ignores
+    "S101", # assert
+    "S105", # hardcoded-password-string
+    "S106", # hardcoded-password-func-arg
+    "S110", # try-except-pass
+    "S314", # suspicious-xml-element-tree-usage
+    "S608", # hardcoded-sql-expression
+]
+"core/netsuite/data_sources/suiteql/*" = [
+    # Bandit ignores
+    "S608", # hardcoded-sql-expression
+]
+
+"settings/*" = [
+    "F401", # imported but unused
+]
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
+section-order = [
+    "future",
+    "stdlib",
+    "standard-library",
+    "django",
+    "drf",
+    "deps",
+    "third-party",
+    "first-party",
+    "local-folder",
+    "local",
+]
+
+[tool.ruff.lint.isort.sections]
+"stdlib" = ["standard-library"]
+"fastapi" = ["fastapi"]
+"deps" = ["third-party"]
+"local" = ["first-party", "local-folder"]
