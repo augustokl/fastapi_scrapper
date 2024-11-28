@@ -11,6 +11,6 @@ class Book(SQLModel, table=True):
     tax: Decimal
     currency: str
     title: str
-    stock: int
+    quantity: int
     number_of_reviews: int
     description: str

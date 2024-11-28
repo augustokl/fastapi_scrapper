@@ -3,13 +3,12 @@ from typing import Annotated
 from fastapi import Depends
 from sqlmodel import Session, create_engine
 
-from ..settings import get_settings
-
-# models
-from .user import *  # noqa
+from app.core.settings import get_settings
 
 
-engine = create_engine(str(get_settings().database_url), isolation_level="SERIALIZABLE")
+settings = get_settings()
+
+engine = create_engine(str(settings.database_url), isolation_level="SERIALIZABLE")
 
 
 def get_session():
